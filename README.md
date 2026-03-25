@@ -27,6 +27,29 @@ The dashboard is organized around:
 - institute drill-down
 - supporting legacy views for maps, rankings, trends, source types, Wordfish, and Confucius Institute models
 
+## Public Sharing
+
+For a simple public link that non-technical users can open directly, the recommended setup is:
+
+- deploy the dashboard on Streamlit Community Cloud
+- keep the included HTML snapshot as a backup share artifact
+
+### Deploy On Streamlit Community Cloud
+
+1. Push the latest repository state to GitHub.
+2. Open [Streamlit Community Cloud](https://share.streamlit.io/).
+3. Create a new app from this repository.
+4. Set the main file path to:
+   - `app/results_dashboard.py`
+5. Deploy the app and share the resulting public URL.
+
+The repository already includes the deployment files Streamlit Cloud needs:
+
+- `requirements.txt`
+- `.streamlit/config.toml`
+
+If someone prefers a static artifact instead of the live app, use the HTML snapshot below.
+
 ## Shareable Snapshot
 
 A static HTML snapshot is included here:
