@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import ast
 import importlib.util
+import importlib
 import sys
 from pathlib import Path
+import builtins
 
 import numpy as np
 import pandas as pd
@@ -109,3 +111,24 @@ def test_all_plotly_chart_calls_use_explicit_streamlit_keys() -> None:
 
     assert plotly_calls, "Expected at least one plotly_chart call in the dashboard."
     assert not missing_key_lines, f"Missing explicit key= on plotly_chart calls at lines {missing_key_lines}"
+
+
+def test_typology_dashboard_modules_do_not_require_matplotlib_on_import(monkeypatch) -> None:
+    original_import = builtins.__import__
+
+    def guarded_import(name, globals=None, locals=None, fromlist=(), level=0):
+        if name.startswith("matplotlib"):
+            raise ModuleNotFoundError("No module named 'matplotlib'")
+        return original_import(name, globals, locals, fromlist, level)
+
+    monkeypatch.setattr(builtins, "__import__", guarded_import)
+
+    for name in [
+        "visualization",
+        "visualization.typology_dashboard_charts",
+        "visualization.typology_dashboard_data",
+    ]:
+        sys.modules.pop(name, None)
+
+    importlib.import_module("visualization.typology_dashboard_charts")
+    importlib.import_module("visualization.typology_dashboard_data")
