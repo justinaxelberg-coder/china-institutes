@@ -1,0 +1,7 @@
+rows=65
+filtered_rows_n_docs_ge_10=46
+corr_all_wordfish_embedding=0.3168
+corr_all_wordfish_dictionary=0.3894
+corr_filtered_wordfish_embedding=0.4843
+corr_filtered_wordfish_dictionary=0.4066
+scope=en + orientation_eligible + dictionary_matched + (likely_modern_policy or sensitive_curated)
